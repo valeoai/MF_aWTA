@@ -1,5 +1,5 @@
 # Annealed Winner-Takes-All for Motion Forecasting 
-### [Paper](https://arxiv.org/abs/2409.11172)
+### [Paper](https://arxiv.org/abs/2409.11172) | [Webpage](https://valeoai.github.io/publications/awta/)
 
 ### This is official implementation for annealed Winner-Takes-All loss presented in this work. Work under review, the code will be released soon.
 
