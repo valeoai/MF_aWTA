@@ -50,7 +50,7 @@ export PYTHONPATH=$PYTHONPATH:~/workspace/UniTraj
 export PYTHONPATH=$PYTHONPATH:~/workspace/UniTraj/unitraj/models/mtr/ops
 
 ```
-known issues:
+Known issues and solutions:
 1. Make sure to have the compiled `knn_cuda.cpython-39-x86_64-linux-gnu.so` in `~/workspace/UniTraj/unitraj/models/mtr/ops/knn` Otherwise, it means that the command `python setup.py develop` didn’t work well when 
 install UniTraj
 
@@ -62,7 +62,7 @@ sys.path.append("/Path/TO/UniTraj/unitraj/models/mtr/ops/")
 sys.path.append("/Path/TO/UniTraj/")
 ```
 
-You can verify the installation of UniTraj via running the training script:
+You can verify the installation of UniTraj by running the training script:
 
 ```bash
 cd unitraj
@@ -73,7 +73,7 @@ The model will be trained on several sample data.
 
 ## Code Structure
 
-There are three main components in UniTraj: dataset, model and config.
+There are three main components in UniTraj: dataset, model, and config.
 The structure of the code is as follows:
 
 ```
@@ -97,14 +97,14 @@ unitraj
 ├── utils
 ```
 
-There is a base config, dataset and model class, and each model has its own config, dataset and model class that inherit
+There is a base config, dataset, and model class, and each model has its own config, dataset, and model class that inherit
 from the base class.
 
 ## Pipeline
 
 ### 1. Data Preparation
 
-The code is modified from UniTraj. And UniTraj takes data from [ScenarioNet](https://github.com/metadriverse/scenarionet) as input. Process the data with
+The code is modified from UniTraj. UniTraj also takes data from [ScenarioNet](https://github.com/metadriverse/scenarionet) as input. Process the data with
 ScenarioNet in advance.
 
 1. You need to download [Argoverse 2](https://www.argoverse.org/av2.html#download-link) and [Waymo Open Motion Datasest](https://waymo.com/open/download). 
@@ -126,7 +126,7 @@ python -m scenarionet.convert_waymo -d /path/to/your/database/validation/ --raw_
 
 UniTraj uses [Hydra](https://hydra.cc/docs/intro/) to manage configuration files.
 
-Universal configuration file is located in `unitraj/config/config.yaml`.
+The universal configuration file is located in `unitraj/config/config.yaml`.
 Each model has its own configuration file in `unitraj/config/method/`, for
 example, `unitraj/config/method/autobot.yaml`.
 
@@ -144,7 +144,7 @@ For example, for running MTR with Argoverse 2, you can run (you may need to spec
 cd unitraj
 python train.py --config-name=mtr_av2_awta
 ```
-By default, the model is trained with 8 GPUs, you can modify the number of GPUs in the corresponding config file like `mtr_av2_awta`, the batch size could be changed in `configs/method/MTR_wo_anchor.yaml`.
+By default, the model is trained with 8 GPUs, you can modify the number of GPUs in the corresponding config file like `mtr_av2_awta`, and the batch size could be changed in `configs/method/MTR_wo_anchor.yaml`.
 
 ### 4. Inference and evaluation
 
@@ -156,7 +156,7 @@ python predict.py --config-name=mtr_av2_awta_predict
 ```
 
 ### 5. Train your model with aWTA made easy
-aWTA is a standalone loss that is compatible to all motion forecasting models that formally use the WTA loss. You only need to change the WTA loss into aWTA? Here is an example:
+aWTA is a standalone loss compatible with all motion forecasting models that formally use the WTA loss. You only need to change the WTA loss into aWTA. Here is an example:
 
 From WTA loss:
 ```bash
@@ -174,7 +174,7 @@ def wta_loss(prediction, gt, gt_valid_mask):
     nearest_hypothesis_idxs = distance.argmin(dim=-1) # [batch]
     nearest_hypothesis_bs_idxs = torch.arange(nearest_hypothesis_idxs.shape[0]).type_as(nearest_hypothesis_idxs) # [batch]
     
-    # extract the L2 distance bewteen the selected hypothesis and gt
+    # extract the L2 distance between the selected hypothesis and gt
     loss_reg = distance[nearest_hypothesis_bs_idxs, nearest_hypothesis_idxs] # [batch]
     return loss_reg.mean() # mean over the batch
 ```
@@ -185,7 +185,7 @@ def awta_loss(prediction, gt, gt_valid_mask, cur_temperature):
     prediction: predicted forecasts, of shape [batch, hypotheses, timesteps, 2]
     gt: ground-truth forecasting trajectory, of shape [batch, timesteps, 2]
     gt_valid_mask: ground-truth forecasting mask indicating the valid future steps, of shape [batch, timesteps]
-    cur_temperature: current temperature for aWTA
+    cur_temperature: the current temperature for aWTA
     '''
     # compute prediction, gt distance, such as ADE
     distance = compute_ade(prediction, gt, gt_valid_mask)
@@ -195,12 +195,12 @@ def awta_loss(prediction, gt, gt_valid_mask, cur_temperature):
     
     # weight the distance by awta weights
     loss_reg = distance * awta_weights # [batch, hypotheses]
-    return loss_reg.sum(-1).mean() # sum over weighted hypotheses, and average over the batch
+    return loss_reg.sum(-1).mean() # sum over weighted hypotheses and average over the batch
 
 def temperature_scheduler(init_temperature, cur_epoch, exp_base):
     '''
     init_temperature: initial temperature
-    cur_epoch: curent number of epochs
+    cur_epoch: current number of epochs
     exp_base: exponential scheduler base    
     '''
     return init_temperature*exp_base**cur_epoch
@@ -224,8 +224,6 @@ def temperature_scheduler(init_temperature, cur_epoch, exp_base):
 }
 ```
 
-### Acknoledgement
+### Acknowledgement
 
 The code is modified from [UniTraj](https://github.com/vita-epfl/UniTraj) and [MTR](https://github.com/sshaoshuai/MTR).
-
-
