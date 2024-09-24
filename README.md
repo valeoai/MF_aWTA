@@ -208,6 +208,8 @@ def temperature_scheduler(init_temperature, cur_epoch, exp_base):
 
 
 ---
+## License
+This work is released under the [Apache 2.0 license](./LICENSE).
 
 ### For citation:
 
