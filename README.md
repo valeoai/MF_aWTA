@@ -146,7 +146,7 @@ python train.py --config-name=mtr_av2_awta
 ```
 By default, the model is trained with 8 GPUs, you can modify the number of GPUs in the corresponding config file like `mtr_av2_awta`, the batch size could be changed in `configs/method/MTR_wo_anchor.yaml`.
 
-### 4. Evaluation
+### 4. Inference and evaluation
 
 1. Download the checkpoints from the Release tagged model_weights and put them into  `./model_zoo/`. 
 2. Run the evaluation, as an example, to evaluate MTR with av2, you can run:
@@ -157,6 +157,7 @@ python predict.py --config-name=mtr_av2_awta_predict
 
 ### 5. Train your model with aWTA made easy
 aWTA is a standalone loss that is compatible to all motion forecasting models that formally use the WTA loss. You only need to change the WTA loss into aWTA? Here is an example:
+
 From WTA loss:
 ```bash
 def wta_loss(prediction, gt, gt_valid_mask):
