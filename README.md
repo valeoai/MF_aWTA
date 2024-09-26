@@ -30,7 +30,7 @@ conda activate unitraj
 ```bash
 pip --no-cache-dir install "metadrive-simulator>=0.4.1.1"
 python -m metadrive.examples.profile_metadrive # test your installation
-cd ~/workspace/scenarionet
+cd scenarionet
 sudo apt-get update
 sudo apt install libspatialindex-dev
 pip --no-cache-dir install -e .
@@ -46,8 +46,8 @@ git clone https://github.com/valeoai/MF_aWTA
 pip install -r requirements.txt
 pip install  --no-cache-dir torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https://download.pytorch.org/whl/cu118
 python setup.py develop #only for the first install
-export PYTHONPATH=$PYTHONPATH:~/workspace/UniTraj
-export PYTHONPATH=$PYTHONPATH:~/workspace/UniTraj/unitraj/models/mtr/ops
+export PYTHONPATH=$PYTHONPATH:UniTraj
+export PYTHONPATH=$PYTHONPATH:UniTraj/unitraj/models/mtr/ops
 
 ```
 Known issues and solutions:
