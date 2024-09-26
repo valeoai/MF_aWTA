@@ -51,10 +51,10 @@ export PYTHONPATH=$PYTHONPATH:~/workspace/UniTraj/unitraj/models/mtr/ops
 
 ```
 Known issues and solutions:
-1. Make sure to have the compiled `knn_cuda.cpython-39-x86_64-linux-gnu.so` in `~/workspace/UniTraj/unitraj/models/mtr/ops/knn` Otherwise, it means that the command `python setup.py develop` didn’t work well when 
+1. Make sure to have the compiled `knn_cuda.cpython-39-x86_64-linux-gnu.so` in `/UniTraj/unitraj/models/mtr/ops/knn` Otherwise, it means that the command `python setup.py develop` didn’t work well when 
 install UniTraj
 
-2. if you have path issue when running 'train.py' or 'predict.py', you can try to insert the absolute path of unitraj and `~/workspace/UniTraj/unitraj/models/mtr/ops/knn` at the beginning of 'train.py' and 'predict.py'
+2. if you have path issue when running 'train.py' or 'predict.py', you can try to insert the absolute path of unitraj and `/UniTraj/unitraj/models/mtr/ops/knn` at the beginning of 'train.py' and 'predict.py'
 
 ```python
 import os
