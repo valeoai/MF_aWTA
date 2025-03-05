@@ -1,5 +1,5 @@
 # Annealed Winner-Takes-All for Motion Forecasting
-
+## This work has been accepted to ICRA 2025
 [**Website**](https://valeoai.github.io/publications/awta/) | [**Paper**](https://arxiv.org/abs/2409.11172)
 
 ### 💡 In this work, we propose a plug-and-play loss that replaces the widely used Winner-Takes-All loss for motion forecasting models.
@@ -221,7 +221,7 @@ This work is released under the [Apache 2.0 license](./LICENSE).
                Mickaël Chen and
                \'{E}loi Zablocki and
                Matthieu Cord},
-  journal = {under review},
+  journal = {ICRA},
   year = {2025}
 }
 ```
